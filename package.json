@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dash": "^3.16.2"
+    "dash": "^3.16.2",
+    "dash-platform-user": "^16.0.0",
+    "dash-secure-message": "^16.0.0"
   }
 }
