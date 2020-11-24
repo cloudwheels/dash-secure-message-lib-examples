@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "DEBUG=server:debug nodemon index.js",
     "develop-user": "DEBUG=server:debug nodemon test-user.js",
-    "develop-encrypt": "DEBUG=server:debug nodemon test-encrypt.js"
+    "develop-encrypt": "DEBUG=server:debug nodemon test-encrypt.js",
+    "test:user": "node test-user.js",
+    "test:encrypt": "node test-encrypt.js",
+
   },
   "author": "",
   "license": "ISC",
