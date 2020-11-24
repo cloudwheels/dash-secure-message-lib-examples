@@ -1,6 +1,6 @@
 {
   "name": "dash-platform-user-test",
-  "version": "16.0.0",
+  "version": "16.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "develop-user": "DEBUG=server:debug nodemon test-user.js",
     "develop-encrypt": "DEBUG=server:debug nodemon test-encrypt.js",
     "test:user": "node test-user.js",
-    "test:encrypt": "node test-encrypt.js",
+    "test:encrypt": "node test-encrypt.js"
 
   },
   "author": "",
