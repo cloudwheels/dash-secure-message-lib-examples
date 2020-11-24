@@ -1,25 +1,27 @@
 const DashSecureMessage = require("dash-secure-message");
 
-const privateAlice = "f2f774d88cd8478eb65a3cd3bba2b74ee235465c4d526cda7c9020c6cda416c4";
-const publicAlice = "A6RPlTCyz01wNWqBU/hG2X/FpK7kSaKeD5Ryx3SbRctL";
-const privateBob = "afe0a80e7bd5ec64a656e1fd65dc0951f0704e3c05465d8e8194a5ef419ea45c";
-const publicBob = "A2QdE/f4DIpTuxPkGYFQYzqqZ9ytGy0hMwT6ccth17L4";
-const privateCarol = "89cbe055cab9db46eeb57790b62d5b9a421e3627e4cb62fefb10cc8f4dad85c6";
-const publicCarol = "A6+8q1NoaYsmuRNzpoNiUMvDpXEBOYG/yMn3qDXjYNLg"
+
+const privateBob = "80d809e667663b24d259441901bee271659ba222c4b2c505a7f60d10ef537290";
+const publicBob = "A4bZidQmmnMMuYtvqtsn20jnVlZrm63Bb2HDaZ6fofOZ";
+const privateCarol = "6b097917b5625a8cac9ad00d61ef3858999be39cb724a796ce04536fa3550728";
+const publicCarol = "A0Tv1evLdiIGdPrqHUMWgWuFxlb28MmojJeZIIEXduqc";
+const privateDave= "9d1a602fce58d69e96ea50157bff052da187ae806bbc14a059e7507e1f3ea9aa";
+const publicDave="AmKYlq3kcetqNSFql+yU0oupawWnulBKJQ+eC6JSNGHm";
 
 const msg = "test";
-const options = {} // {binary: false};
+const options = {binary: false};
 
-const encrypted = DashSecureMessage.encrypt(privateAlice, msg, publicCarol, options);
-const encryptedForGroup = DashSecureMessage.encrypt(privateAlice, msg, [publicBob, publicCarol], options);
+const encrypted = DashSecureMessage.encrypt(privateBob, msg, publicCarol, options);
+const encryptedForGroup = DashSecureMessage.encrypt(privateBob, msg, [publicCarol, publicDave], options);
 console.log('encrypted message:', encrypted);
 console.log('encrypted group message:', encryptedForGroup);
 
 //console.log(encrypted[0][1]==encrypted[1][1]);
 
 
-const decrypted = DashSecureMessage.decrypt(privateCarol, encrypted, publicAlice, options);
+const decrypted = DashSecureMessage.decrypt(privateCarol, encrypted, publicBob, options);
 console.log('decrypted message:', decrypted)
+
 
 let encryptedGroupMessage = encryptedForGroup;
 
@@ -30,14 +32,23 @@ if (!options.binary) {
     
 }
 
-//bob can decrypt using his key
-const decryptedForGroupBob = DashSecureMessage.decrypt(privateBob, encryptedGroupMessage, publicAlice, options);
-console.log('decrypted group message for bob:', decryptedForGroupBob)
+
+//TEST GROUP ENCRYPTION
+
 
 //carol can encrypt using her key
-//const decryptedForGroupCarol = DashSecureMessage.decrypt(privateCarol, encryptedGroupMessage, publicAlice, binary);
-//console.log('decrypted group message for carol:', decryptedForGroupCarol)
+const decryptedForGroupCarol = DashSecureMessage.decrypt(privateCarol, encryptedGroupMessage, publicBob, options);
+console.log('decrypted group message for carol:', decryptedForGroupCarol)
 
 
-//console.log(decryptedForGroupBob[0][0]==decryptedForGroupCarol[0][0])
+//dave can decrypt using his key
+const decryptedForGroupDave = DashSecureMessage.decrypt(privateDave, encryptedGroupMessage, publicBob, options);
+console.log('decrypted group message for dave:', decryptedForGroupDave)
+
+
+// should be false
+console.log(decryptedForGroupCarol[0][0]==decryptedForGroupDave[0][0])
+
+// should be true
+console.log(decryptedForGroupCarol[0][1]==decryptedForGroupDave[0][1])
 
