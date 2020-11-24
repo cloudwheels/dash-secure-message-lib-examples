@@ -3,17 +3,17 @@ const DashPlatformUser = require("dash-platform-user");
 (async () => {
     try {
 
-        const aliceMnemonic = 'hidden offer message develop mirror learn barely marble expose lend fish jelly';
-        const bobMnemonic = 'magic group often spot grief powder educate dune village craft polar enrich';
-        const carolMnemonic = 'copper eager curious happy dignity wash acquire tip busy love urge piano';
+        const bobMnemonic = 'remain ordinary replace fruit work fortune general stone more enjoy bubble entry';
+        const carolMnemonic = 'bridge report million quantum degree burst devote door truly afford pride visa';
+        const daveMnemonic = 'globe vague enrich habit volume notable churn mention exist grow theory any';
 
         const options = {
             connection_options:
-                { wallet: { mnemonic: carolMnemonic } }
+                { wallet: { mnemonic: daveMnemonic } }
         }
 
         let foundUser = '';
-        foundUser = await DashPlatformUser.findByName({ name: 'carol', options: { returnPrivateKey: true } }, options);
+        foundUser = await DashPlatformUser.findByName({ name: 'dave', options: { returnPrivateKey: true } }, options);
 
         console.dir(foundUser);
         return;
